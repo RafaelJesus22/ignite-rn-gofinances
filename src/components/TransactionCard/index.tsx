@@ -9,19 +9,44 @@ import {
   Icon,
   CategoryName,
   Date,
-} from './styles'
+} from './styles';
 
-export const TransactionCard = () => {
+interface CategoryProps {
+  name: string;
+  icon: string;
+}
+
+interface Data {
+  title: string;
+  amount: string;
+  category: CategoryProps;
+  date: string;
+}
+
+interface Props {
+  data: Data;
+}
+
+export const TransactionCard: React.FC<Props> = ({ data }) => {
+  const { amount, category, date, title } = data;
   return (
     <Container>
-      <Title>Desenvolvimento de Site</Title>
-      <Amount>R$ 12.000,00</Amount>
+      <Title>
+        {title}
+        </Title>
+      <Amount>
+        {amount}
+      </Amount>
       <Footer>
         <Category>
-          <Icon name='dollar-sign'/>
-          <CategoryName>Vendas</CategoryName>
+          <Icon name={category.icon}/>
+          <CategoryName>
+            {category.name}
+          </CategoryName>
         </Category>
-        <Date>13/04/2021</Date>
+        <Date>
+          {date}
+        </Date>
       </Footer>
     </Container>
   );
