@@ -16,7 +16,8 @@ interface CategoryProps {
   icon: string;
 }
 
-interface Data {
+export interface TransactionCardProps {
+  type: 'positive' | 'negative';
   title: string;
   amount: string;
   category: CategoryProps;
@@ -24,17 +25,18 @@ interface Data {
 }
 
 interface Props {
-  data: Data;
+  data: TransactionCardProps;
 }
 
 export const TransactionCard: React.FC<Props> = ({ data }) => {
-  const { amount, category, date, title } = data;
+  const { amount, category, date, title, type } = data;
   return (
     <Container>
       <Title>
         {title}
         </Title>
-      <Amount>
+      <Amount type={type}>
+        {type === 'negative' && '- '}
         {amount}
       </Amount>
       <Footer>
